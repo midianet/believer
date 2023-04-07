@@ -7,6 +7,7 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
+  int level = 0; //todo trazer do prefs.
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -27,7 +28,7 @@ class _CalendarPageState extends State<CalendarPage> {
                   ),
                   RichText(
                     text: const TextSpan(
-                        text: "Oct",
+                        text: "Apr",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Color(0XFF263064),
@@ -35,7 +36,7 @@ class _CalendarPageState extends State<CalendarPage> {
                         ),
                         children: [
                           TextSpan(
-                            text: " 2009",
+                            text: " 2023",
                             style: TextStyle(
                               fontWeight: FontWeight.normal,
                               fontSize: 16,
@@ -51,8 +52,8 @@ class _CalendarPageState extends State<CalendarPage> {
                   fontWeight: FontWeight.bold,
                   color: Color(0XFF3E3993),
                 ),
-              )
-            ],
+              ),
+             ],
           ),
         ),
         Positioned(
@@ -72,13 +73,65 @@ class _CalendarPageState extends State<CalendarPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      buildDateColumn("S", 7, false),
-                      buildDateColumn("M", 8, false),
-                      buildDateColumn("T", 9, false),
-                      buildDateColumn("W", 10, true),
-                      buildDateColumn("T", 11, false),
-                      buildDateColumn("F", 12, false),
-                      buildDateColumn("S", 13, false),
+                      buildDateColumn("Mon", 8, false),
+                      buildDateColumn("Tur", 9, false),
+                      buildDateColumn("Wed", 10, true),
+                      buildDateColumn("Tru", 11, false),
+                      buildDateColumn("Fri", 12, false),
+                      buildDateColumn("Sat", 13, false),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 10 , right: 10) ,
+                  child: Row(
+                    //crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      OutlinedButton(
+                          onPressed: () {
+                            setState(() {level = 0;});
+                          },
+                          child: Text(
+                              "Basic",
+                              style: TextStyle(
+                                color: (level == 0) ? Colors.green : Colors.black26
+                              ),
+                          ),
+                      ),
+                      OutlinedButton(
+                          onPressed: () {
+                            setState(() {level = 1;});
+                          },
+                        child: Text(
+                          "Level 1",
+                          style: TextStyle(
+                              color: (level == 1) ? Colors.green : Colors.black26
+                          ),
+                        ),
+                      ),
+                      OutlinedButton(
+                        onPressed: () {
+                          setState(() {level = 2;});
+                        },
+                        child: Text(
+                          "Level 2",
+                          style: TextStyle(
+                              color: (level == 2) ? Colors.green : Colors.black26
+                          ),
+                        ),
+                      ),
+                      OutlinedButton(
+                        onPressed: () {
+                          setState(() {level = 4;});
+                        },
+                        child: Text(
+                          "Grammar",
+                          style: TextStyle(
+                              color: (level == 4) ? Colors.green : Colors.black26
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -86,9 +139,19 @@ class _CalendarPageState extends State<CalendarPage> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        buildTaskListItem(),
-                        buildTaskListItem(),
-                        buildTaskListItem(),
+                        buildTaskListItem("07:00 AM","Conversation", "Bruno", "" ,"Miami"),
+                        buildTaskListItem("08:00 AM","Conversation", "Guilherme", "" ,"Miami"),
+                        buildTaskListItem("09:00 AM","Role Play", "Avahi", "" ,"Miami"),
+                        buildTaskListItem("10:00 AM","Vocabulary", "Fernanda", "" ,"Miami"),
+                        buildTaskListItem("11:00 AM","Conversation", "Maria", "" ,"Miami"),
+                        buildTaskListItem("13:00 AM","Conversation", "Suzane", "" ,"Miami"),
+                        buildTaskListItem("14:00 AM","Role Play", "Bruno", "" ,"Miami"),
+                        buildTaskListItem("15:00 AM","Conversation", "Fernanda", "" ,"Miami"),
+                        buildTaskListItem("16:00 AM","Conversation", "Pedro", "" ,"Miami"),
+                        buildTaskListItem("17:00 AM","Vocabulary", "Guilherme", "" ,"Miami"),
+                        buildTaskListItem("18:00 AM","Vocabulary", "Tiago", "" ,"Miami"),
+                        buildTaskListItem("19:00 AM","Conversation", "Bruno", "" ,"Miami"),
+                        buildTaskListItem("20:00 AM","Conversation", "Avahi", "" ,"Miami"),
                       ],
                     ),
                   ),
@@ -96,14 +159,14 @@ class _CalendarPageState extends State<CalendarPage> {
               ],
             ),
           ),
-        )
+        ),
       ],
     );
   }
 
-  Container buildTaskListItem() {
+  Container buildTaskListItem(String hour, String type, String teacher, String photo, String room ) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 25),
+      margin: const EdgeInsets.only(bottom: 5),
       child: Column(
         children: [
           Row(
@@ -126,26 +189,12 @@ class _CalendarPageState extends State<CalendarPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     RichText(
-                      text: const TextSpan(
-                          text: "07:00",
-                          style: TextStyle(
+                      text: TextSpan(
+                          text: hour,
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                           ),
-                          children: [
-                            TextSpan(
-                              text: " AM",
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                color: Colors.grey,
-                              ),
-                            )
-                          ]),
-                    ),
-                    const Text(
-                      "1 h 45 min",
-                      style: TextStyle(
-                        color: Colors.grey,
                       ),
                     )
                   ],
@@ -154,38 +203,28 @@ class _CalendarPageState extends State<CalendarPage> {
             ],
           ),
           const SizedBox(
-            height: 10,
+            height: 5,
           ),
           Container(
-            height: 185,
+            height: 80,
             width: double.infinity,
             decoration: BoxDecoration(
                 border: Border.all(width: 1, color: Colors.grey),
                 borderRadius: BorderRadius.circular(20)),
             margin: const EdgeInsets.only(right: 10, left: 30),
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Typography",
-                  style: TextStyle(
+                Text(
+                  type,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
                   ),
                 ),
                 const SizedBox(
                   height: 5,
-                ),
-                const Text(
-                  "The Basic of Typography I",
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12,
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -200,57 +239,36 @@ class _CalendarPageState extends State<CalendarPage> {
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text(
-                          "Gabriel Sutton",
-                          style: TextStyle(
+                          teacher,
+                          style: const TextStyle(
                             fontSize: 15,
                           ),
                         ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          "722-085-9210",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12,
-                          ),
+                        const SizedBox(
+                          height: 2,
                         ),
                       ],
                     )
                   ],
                 ),
                 const SizedBox(
-                  height: 15,
+                  height: 2,
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(
-                      Icons.location_on,
-                      size: 20,
-                    ),
                     const SizedBox(
                       width: 5,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text(
-                          "Faculty of Art & Design Building",
-                          style: TextStyle(
+                          room,
+                          style: const TextStyle(
                             fontSize: 15,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          "Room C1, 1st floor",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12,
                           ),
                         ),
                       ],

@@ -12,8 +12,6 @@ class _SchoolManagementState extends State<SchoolManagement> {
   int _selectedItemIndex = 0;
   final List pages = [
     const HomePage(),
-    null,
-    null,
     const CalendarPage(),
     null,
   ];
@@ -37,23 +35,15 @@ class _SchoolManagementState extends State<SchoolManagement> {
             },
             items: const [
               BottomNavigationBarItem(
-                label: "",
+                label: "Home",
                 icon: Icon(Icons.home),
               ),
               BottomNavigationBarItem(
-                label: "",
-                icon: Icon(Icons.insert_chart),
-              ),
-              BottomNavigationBarItem(
-                label: "",
-                icon: Icon(Icons.done),
-              ),
-              BottomNavigationBarItem(
-                label: "",
+                label: "Calendar",
                 icon: Icon(Icons.calendar_today),
               ),
               BottomNavigationBarItem(
-                label: "",
+                label: "News",
                 icon: Icon(Icons.chat_bubble),
               ),
             ],
