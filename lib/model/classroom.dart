@@ -8,7 +8,6 @@ class Classroom {
   Level level;
   Classtype type;
   String name;
-
-  Classroom(this.date, this.teacher, this.photo, this.level, this.type, this.name);
-
+  String theme;
+  Classroom(this.date, this.teacher, this.photo, this.level, this.type, this.name, this.theme);
 }

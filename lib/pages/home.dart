@@ -200,7 +200,7 @@ class _HomePageState extends State<HomePage> {
         default: return "Basic";
       }
    }
-   buildColor(level){
+    buildColor(level){
      switch(level){
        case Level.LEVEL_1: return Colors.yellow[600];
        case Level.LEVEL_2: return Colors.orange[800];

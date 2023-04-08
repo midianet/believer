@@ -1,4 +1,5 @@
-import 'package:believer/model/classdate.dart';
+import 'dart:math';
+
 import 'package:believer/model/classroom.dart';
 import 'package:believer/model/classtype.dart';
 import 'package:believer/model/level.dart';
@@ -144,23 +145,57 @@ class _CalendarPageState extends State<CalendarPage> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        buildTaskListItem("07:00 AM"),
-                        buildTaskListItem("08:00 AM"),
-                        buildTaskListItem("09:00 AM"),
-                        buildTaskListItem("10:00 AM"),
-                        buildTaskListItem("11:00 AM"),
-                        buildTaskListItem("13:00 AM"),
-                        buildTaskListItem("14:00 AM"),
-                        buildTaskListItem("15:00 AM"),
-                        buildTaskListItem("16:00 AM"),
-                        buildTaskListItem("17:00 AM"),
-                        buildTaskListItem("18:00 AM"),
-                        buildTaskListItem("19:00 AM"),
-                        buildTaskListItem("20:00 AM")
+                        buildTaskListItem("07:00 AM", [
+                          buildClassDay(7,"Conversation", Level.values.elementAt(level), Classtype.ONLINE, "Copiar link"),
+                          buildClassDay(7,"Conversation", Level.values.elementAt(level), Classtype.LOCAL, "")
+                        ]),
+                        buildTaskListItem("08:00 AM", [
+                          buildClassDay(8, "Role Play", Level.values.elementAt(level), Classtype.ONLINE, "Copiar link"),
+                          buildClassDay(8, "Convesation", Level.values.elementAt(level), Classtype.LOCAL, "")
+                        ]),
+                        buildTaskListItem("09:00 AM", [
+                          buildClassDay(9,"Vocabulary", Level.values.elementAt(level), Classtype.ONLINE, "Copiar link"),
+                          buildClassDay(9, "Role Play", Level.values.elementAt(level), Classtype.LOCAL, "")
+                        ]),
+                        buildTaskListItem("10:00 AM", [
+                          buildClassDay(10,"Conversation", Level.values.elementAt(level), Classtype.ONLINE, "Copiar link"),
+                          buildClassDay(10, "Conversation", Level.values.elementAt(level), Classtype.LOCAL, "")
+                        ]),
+                        buildTaskListItem("11:00 AM", [
+                          buildClassDay(11, "Conversation", Level.values.elementAt(level), Classtype.ONLINE, "Copiar link"),
+                          buildClassDay(11, "Role Play", Level.values.elementAt(level), Classtype.LOCAL, "")
+                        ]),
+                        buildTaskListItem("14:00 AM", [
+                            buildClassDay(12, "Vocabulary", Level.values.elementAt(level), Classtype.ONLINE, "Copiar link"),
+                            buildClassDay(12, "Conversation", Level.values.elementAt(level), Classtype.LOCAL, "")
+                        ]),
+                        buildTaskListItem("15:00 AM", [
+                          buildClassDay(11, "Role Play", Level.values.elementAt(level), Classtype.ONLINE, "Copiar link"),
+                          buildClassDay(11, "Conversation", Level.values.elementAt(level), Classtype.LOCAL, "")
+                        ]),
+                        buildTaskListItem("16:00 AM", [
+                          buildClassDay(11, "Conversation", Level.values.elementAt(level), Classtype.ONLINE, "Copiar link"),
+                          buildClassDay(11, "Vocabulary", Level.values.elementAt(level), Classtype.LOCAL, "")
+                        ]),
+                        buildTaskListItem("17:00 AM", [
+                          buildClassDay(11,"Conversation", Level.values.elementAt(level), Classtype.ONLINE, "Copiar link"),
+                          buildClassDay(11, "Conversation", Level.values.elementAt(level), Classtype.LOCAL, "")
+                        ]),
+                        buildTaskListItem("18:00 AM", [
+                          buildClassDay(11, "Listening",Level.values.elementAt(level), Classtype.ONLINE, "Copiar link"),
+                          buildClassDay(11, "Vocabulary", Level.values.elementAt(level), Classtype.LOCAL, "")
+                        ]),
+                        buildTaskListItem("19:00 AM", [
+                          buildClassDay(11,"Conversation", Level.values.elementAt(level), Classtype.ONLINE, "Copiar link"),
+                          buildClassDay(11, "Listening", Level.values.elementAt(level), Classtype.LOCAL, "")
+                        ]),
+                        buildTaskListItem("20:00 AM", [
+                          buildClassDay(11, "Conversation", Level.values.elementAt(level), Classtype.ONLINE, "Copiar link"),
+                          buildClassDay(11, "Video Activity", Level.values.elementAt(level), Classtype.LOCAL, "")
+                        ]),
                       ],),
                     ),
                   ),
-                )
               ],
             ),
           ),
@@ -169,7 +204,7 @@ class _CalendarPageState extends State<CalendarPage> {
     );
   }
 
-  Container buildTaskListItem(DateTime classdate , Classroom[] classes) {
+  Container buildTaskListItem(String classdate, List<Classroom> classes) {
     return Container(
       margin: const EdgeInsets.only(bottom: 5),
       child: Column(
@@ -195,7 +230,7 @@ class _CalendarPageState extends State<CalendarPage> {
                   children: [
                     RichText(
                       text: TextSpan(
-                          text: classdate.hour.toString(),
+                          text: classdate,
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
@@ -210,53 +245,44 @@ class _CalendarPageState extends State<CalendarPage> {
           const SizedBox(
             height: 5,
           ),
-
-
-           buildTaskItem("Conversation", "Bruno", "" ,"Miami"),
-           buildTaskItem("Conversation", "Guilherme", "" ,"Miami"),
-            ,"Role Play", "Avahi", "" ,"Miami"),
-            ,"Vocabulary", "Fernanda", "" ,"Miami"),
-            ,"Conversation", "Maria", "" ,"Miami"),
-            ,"Conversation", "Suzane", "" ,"Miami"),
-            ,"Role Play", "Bruno", "" ,"Miami"),
-            ,"Conversation", "Fernanda", "" ,"Miami"),
-            ,"Conversation", "Pedro", "" ,"Miami"),
-            ,"Vocabulary", "Guilherme", "" ,"Miami"),
-            ,"Vocabulary", "Tiago", "" ,"Miami"),
-            ,"Conversation", "Bruno", "" ,"Miami"),
-            ,"Conversation", "Avahi", "" ,"Miami"),
-
-
-
-
-
-
-
-
-
+           buildTaskItem(classes[0]),
+          const SizedBox(
+            height: 5,
+          ),
+           buildTaskItem(classes[1]),
         ],
       ),
     );
   }
 
-  Container buildTaskItem(String type, String teacher, String photo, String room ){
+  Container buildTaskItem(Classroom classroom){
     return Container(
       height: 80,
       width: double.infinity,
       decoration: BoxDecoration(
           border: Border.all(width: 1, color: Colors.grey),
-          borderRadius: BorderRadius.circular(20)),
+          //50: 100: 200: 300: 400:  500:  600:  700: 800: 900
+          color: classroom.type == Classtype.ONLINE ? Colors.blueGrey[50] : Colors.green[50],
+          borderRadius: BorderRadius.circular(10)),
       margin: const EdgeInsets.only(right: 10, left: 30),
       padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            type,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 15,
-            ),
+          Row(
+            children: [
+              Text(
+                classroom.theme, //todo: Rever esse texto
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                ),
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              buildType(classroom.type),
+            ],
           ),
           const SizedBox(
             height: 5,
@@ -264,10 +290,10 @@ class _CalendarPageState extends State<CalendarPage> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CircleAvatar(
+              CircleAvatar(
                 radius: 9,
                 backgroundImage: NetworkImage(
-                    "https://images.unsplash.com/photo-1541647376583-8934aaf3448a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=80"),
+                    classroom.photo),
               ),
               const SizedBox(
                 width: 5,
@@ -276,9 +302,10 @@ class _CalendarPageState extends State<CalendarPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    teacher,
+                    classroom.teacher,
                     style: const TextStyle(
                       fontSize: 15,
+                      fontWeight: FontWeight.bold
                     ),
                   ),
                   const SizedBox(
@@ -301,9 +328,10 @@ class _CalendarPageState extends State<CalendarPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    room,
-                    style: const TextStyle(
+                    classroom.name,
+                    style: TextStyle(
                       fontSize: 15,
+                      color: classroom.type == Classtype.ONLINE ?  Colors.blue : Colors.black
                     ),
                   ),
                 ],
@@ -341,47 +369,75 @@ class _CalendarPageState extends State<CalendarPage> {
     );
   }
 
-  buildClassDay(Level level, Classtype type, String classname){
-    DateTime date = DateTime.now();
-    var timesDate = [
-        DateTime.utc(date.year, date.month, date.day, 0, 0, 0),
-        DateTime.utc(date.year, date.month, date.day, 7, 0, 0),
-        DateTime.utc(date.year, date.month, date.day, 8, 0, 0),
-        DateTime.utc(date.year, date.month, date.day, 9, 0, 0),
-        DateTime.utc(date.year, date.month, date.day, 10, 0, 0),
-        DateTime.utc(date.year, date.month, date.day, 11, 0, 0),
-        DateTime.utc(date.year, date.month, date.day, 14, 0, 0),
-        DateTime.utc(date.year, date.month, date.day, 15, 0, 0),
-        DateTime.utc(date.year, date.month, date.day, 16, 0, 0),
-        DateTime.utc(date.year, date.month, date.day, 17, 0, 0),
-        DateTime.utc(date.year, date.month, date.day, 18, 0, 0),
-        DateTime.utc(date.year, date.month, date.day, 19, 0, 0),
-        DateTime.utc(date.year, date.month, date.day, 20, 0, 0)];
-    return [
-      Classroom(timesDate[1], "Bruno", "http://www.google.com", level, type, classname),
-      Classroom(timesDate[1], "Guilherme", "http://www.google.com", level, type, "zoom.xpto.xpto"),
-      Classroom(timesDate[2], "Avahi", "http://www.google.com", level, Classtype.ONLINE, classname),
-      Classroom(timesDate[2], "Fernanda", "http://www.google.com", level, type, "zoom.xpto.xpto"),
-      Classroom(timesDate[3], "Guilherme", "http://www.google.com", level, Classtype.ONLINE, classname),
-      Classroom(timesDate[3], "Amanda", "http://www.google.com", level, type, "zoom.xpto.xpto"),
-      Classroom(timesDate[4], "Gisele", "http://www.google.com", level, Classtype.ONLINE, classname),
-      Classroom(timesDate[4], "Junior", "http://www.google.com", level, type, "zoom.xpto.xpto"),
-      Classroom(timesDate[5], "Patricia", "http://www.google.com", level, Classtype.ONLINE, classname),
-      Classroom(timesDate[5], "Carla", "http://www.google.com", level, type, "zoom.xpto.xpto"),
-      Classroom(timesDate[6], "Rogêrio", "http://www.google.com", level, Classtype.ONLINE, classname),
-      Classroom(timesDate[6], "Maisa", "http://www.google.com", level, type, "zoom.xpto.xpto"),
-      Classroom(timesDate[7], "Pedro", "http://www.google.com", level, type, classname),
-      Classroom(timesDate[7], "Bruno", "http://www.google.com", level, type, "zoom.xpto.xpto"),
-      Classroom(timesDate[8], "Guilherme", "http://www.google.com", level, Classtype.ONLINE, classname),
-      Classroom(timesDate[8], "Avahi", "http://www.google.com", level, type, "zoom.xpto.xpto"),
-      Classroom(timesDate[9], "Gisele", "http://www.google.com", level, Classtype.ONLINE, classname),
-      Classroom(timesDate[9], "Junior", "http://www.google.com", level, type, "zoom.xpto.xpto"),
-      Classroom(timesDate[10], "Peter", "http://www.google.com", level, Classtype.ONLINE, classname),
-      Classroom(timesDate[10], "Narla", "http://www.google.com", level, type, "zoom.xpto.xpto"),
-      Classroom(timesDate[11], "Bruna", "http://www.google.com", level, Classtype.ONLINE, classname),
-      Classroom(timesDate[11], "Marcela", "http://www.google.com", level, type, "zoom.xpto.xpto"),
-      Classroom(timesDate[12], "Valda", "http://www.google.com", level, Classtype.ONLINE, classname),
-      Classroom(timesDate[12], "Marcilene", "http://www.google.com", level, type, "zoom.xpto.xpto"),
+  buildClassDay(int hour, String theme, Level level, Classtype type, String link){
+    var _date = DateTime.now();
+    var _time = DateTime.utc(_date.year, _date.month, _date.day, hour, 0, 0);
+    var _teachers = [
+      "Ivahi",
+      "Iuri",
+      "Bruno",
+      "Natalia",
+      "Iago",
+      "Vitoria",
+      "Sarah",
+      "Vinni",
+      "Carlos"
+      "Bia"
     ];
+    var _photos = [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgBhcplevwUKGRs1P-Ps8Mwf2wOwnW_R_JIA&usqp=CAU",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgBhcplevwUKGRs1P-Ps8Mwf2wOwnW_R_JIA&usqp=CAU",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgBhcplevwUKGRs1P-Ps8Mwf2wOwnW_R_JIA&usqp=CAU",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgBhcplevwUKGRs1P-Ps8Mwf2wOwnW_R_JIA&usqp=CAU",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgBhcplevwUKGRs1P-Ps8Mwf2wOwnW_R_JIA&usqp=CAU",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgBhcplevwUKGRs1P-Ps8Mwf2wOwnW_R_JIA&usqp=CAU",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgBhcplevwUKGRs1P-Ps8Mwf2wOwnW_R_JIA&usqp=CAU",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgBhcplevwUKGRs1P-Ps8Mwf2wOwnW_R_JIA&usqp=CAU",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgBhcplevwUKGRs1P-Ps8Mwf2wOwnW_R_JIA&usqp=CAU",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgBhcplevwUKGRs1P-Ps8Mwf2wOwnW_R_JIA&usqp=CAU",
+  ];
+    var _className = "";
+    if(level ==  Level.BASIC){
+      _className = "Miami";
+    }else if(level == Level.LEVEL_1){
+      _className = "Toronto";
+    }else if (level == Level.LEVEL_2){
+      _className = "Orlando";
+    }else if(level == Level.LEVEL_3 ) {
+      _className = "New York";
+    }else if (level == Level.GRAMMAR){
+      _className = "Sidney";
+    }
+    if(type == Classtype.ONLINE) _className = link;
+    int _teacherId = (1 + Random().nextInt(10 - 1)) -1;
+    return Classroom(_time, _teachers[_teacherId], _photos[_teacherId], level, type, _className, theme);
   }
+
+  buildType(Classtype type){
+    buildLabel(type){
+      switch(type){
+        case Classtype.ONLINE: return "Online";
+        default: return "Local";
+      }
+    }
+    buildColor(type){
+      switch(type){
+        case Classtype.ONLINE: return Colors.yellow[600];
+        default: return Colors.green;
+      }
+    }
+    return Container(
+      padding: const EdgeInsets.only(left: 5, right: 5),
+      decoration: BoxDecoration(
+        color: buildColor(type),
+        borderRadius: const BorderRadius.all(Radius.circular(3.0)),
+      ),
+      child: Text(
+        buildLabel(type),
+        overflow: TextOverflow.ellipsis,
+        style: const TextStyle(color: Colors.white, fontSize: 13),
+      ),
+    );
+  }
+
 }
