@@ -1,0 +1,4 @@
+
+enum Classtype{
+   ONLINE, LOCAL
+}

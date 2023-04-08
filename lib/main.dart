@@ -1,4 +1,4 @@
-import 'package:believer/splash.dart';
+import 'package:believer/pages/splash.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const App());

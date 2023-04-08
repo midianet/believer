@@ -1,3 +1,8 @@
+import 'package:believer/model/classdate.dart';
+import 'package:believer/model/classroom.dart';
+import 'package:believer/model/classtype.dart';
+import 'package:believer/model/level.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CalendarPage extends StatefulWidget {
@@ -139,20 +144,20 @@ class _CalendarPageState extends State<CalendarPage> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        buildTaskListItem("07:00 AM","Conversation", "Bruno", "" ,"Miami"),
-                        buildTaskListItem("08:00 AM","Conversation", "Guilherme", "" ,"Miami"),
-                        buildTaskListItem("09:00 AM","Role Play", "Avahi", "" ,"Miami"),
-                        buildTaskListItem("10:00 AM","Vocabulary", "Fernanda", "" ,"Miami"),
-                        buildTaskListItem("11:00 AM","Conversation", "Maria", "" ,"Miami"),
-                        buildTaskListItem("13:00 AM","Conversation", "Suzane", "" ,"Miami"),
-                        buildTaskListItem("14:00 AM","Role Play", "Bruno", "" ,"Miami"),
-                        buildTaskListItem("15:00 AM","Conversation", "Fernanda", "" ,"Miami"),
-                        buildTaskListItem("16:00 AM","Conversation", "Pedro", "" ,"Miami"),
-                        buildTaskListItem("17:00 AM","Vocabulary", "Guilherme", "" ,"Miami"),
-                        buildTaskListItem("18:00 AM","Vocabulary", "Tiago", "" ,"Miami"),
-                        buildTaskListItem("19:00 AM","Conversation", "Bruno", "" ,"Miami"),
-                        buildTaskListItem("20:00 AM","Conversation", "Avahi", "" ,"Miami"),
-                      ],
+                        buildTaskListItem("07:00 AM"),
+                        buildTaskListItem("08:00 AM"),
+                        buildTaskListItem("09:00 AM"),
+                        buildTaskListItem("10:00 AM"),
+                        buildTaskListItem("11:00 AM"),
+                        buildTaskListItem("13:00 AM"),
+                        buildTaskListItem("14:00 AM"),
+                        buildTaskListItem("15:00 AM"),
+                        buildTaskListItem("16:00 AM"),
+                        buildTaskListItem("17:00 AM"),
+                        buildTaskListItem("18:00 AM"),
+                        buildTaskListItem("19:00 AM"),
+                        buildTaskListItem("20:00 AM")
+                      ],),
                     ),
                   ),
                 )
@@ -164,7 +169,7 @@ class _CalendarPageState extends State<CalendarPage> {
     );
   }
 
-  Container buildTaskListItem(String hour, String type, String teacher, String photo, String room ) {
+  Container buildTaskListItem(DateTime classdate , Classroom[] classes) {
     return Container(
       margin: const EdgeInsets.only(bottom: 5),
       child: Column(
@@ -190,7 +195,7 @@ class _CalendarPageState extends State<CalendarPage> {
                   children: [
                     RichText(
                       text: TextSpan(
-                          text: hour,
+                          text: classdate.hour.toString(),
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
@@ -205,78 +210,105 @@ class _CalendarPageState extends State<CalendarPage> {
           const SizedBox(
             height: 5,
           ),
-          Container(
-            height: 80,
-            width: double.infinity,
-            decoration: BoxDecoration(
-                border: Border.all(width: 1, color: Colors.grey),
-                borderRadius: BorderRadius.circular(20)),
-            margin: const EdgeInsets.only(right: 10, left: 30),
-            padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  type,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const CircleAvatar(
-                      radius: 9,
-                      backgroundImage: NetworkImage(
-                          "https://images.unsplash.com/photo-1541647376583-8934aaf3448a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=80"),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          teacher,
-                          style: const TextStyle(
-                            fontSize: 15,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 2,
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 2,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          room,
-                          style: const TextStyle(
-                            fontSize: 15,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                )
-              ],
+
+
+           buildTaskItem("Conversation", "Bruno", "" ,"Miami"),
+           buildTaskItem("Conversation", "Guilherme", "" ,"Miami"),
+            ,"Role Play", "Avahi", "" ,"Miami"),
+            ,"Vocabulary", "Fernanda", "" ,"Miami"),
+            ,"Conversation", "Maria", "" ,"Miami"),
+            ,"Conversation", "Suzane", "" ,"Miami"),
+            ,"Role Play", "Bruno", "" ,"Miami"),
+            ,"Conversation", "Fernanda", "" ,"Miami"),
+            ,"Conversation", "Pedro", "" ,"Miami"),
+            ,"Vocabulary", "Guilherme", "" ,"Miami"),
+            ,"Vocabulary", "Tiago", "" ,"Miami"),
+            ,"Conversation", "Bruno", "" ,"Miami"),
+            ,"Conversation", "Avahi", "" ,"Miami"),
+
+
+
+
+
+
+
+
+
+        ],
+      ),
+    );
+  }
+
+  Container buildTaskItem(String type, String teacher, String photo, String room ){
+    return Container(
+      height: 80,
+      width: double.infinity,
+      decoration: BoxDecoration(
+          border: Border.all(width: 1, color: Colors.grey),
+          borderRadius: BorderRadius.circular(20)),
+      margin: const EdgeInsets.only(right: 10, left: 30),
+      padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            type,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
             ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const CircleAvatar(
+                radius: 9,
+                backgroundImage: NetworkImage(
+                    "https://images.unsplash.com/photo-1541647376583-8934aaf3448a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=80"),
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    teacher,
+                    style: const TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 2,
+                  ),
+                ],
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 2,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                width: 5,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    room,
+                    style: const TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
+                ],
+              )
+            ],
           )
         ],
       ),
@@ -307,5 +339,49 @@ class _CalendarPageState extends State<CalendarPage> {
         ],
       ),
     );
+  }
+
+  buildClassDay(Level level, Classtype type, String classname){
+    DateTime date = DateTime.now();
+    var timesDate = [
+        DateTime.utc(date.year, date.month, date.day, 0, 0, 0),
+        DateTime.utc(date.year, date.month, date.day, 7, 0, 0),
+        DateTime.utc(date.year, date.month, date.day, 8, 0, 0),
+        DateTime.utc(date.year, date.month, date.day, 9, 0, 0),
+        DateTime.utc(date.year, date.month, date.day, 10, 0, 0),
+        DateTime.utc(date.year, date.month, date.day, 11, 0, 0),
+        DateTime.utc(date.year, date.month, date.day, 14, 0, 0),
+        DateTime.utc(date.year, date.month, date.day, 15, 0, 0),
+        DateTime.utc(date.year, date.month, date.day, 16, 0, 0),
+        DateTime.utc(date.year, date.month, date.day, 17, 0, 0),
+        DateTime.utc(date.year, date.month, date.day, 18, 0, 0),
+        DateTime.utc(date.year, date.month, date.day, 19, 0, 0),
+        DateTime.utc(date.year, date.month, date.day, 20, 0, 0)];
+    return [
+      Classroom(timesDate[1], "Bruno", "http://www.google.com", level, type, classname),
+      Classroom(timesDate[1], "Guilherme", "http://www.google.com", level, type, "zoom.xpto.xpto"),
+      Classroom(timesDate[2], "Avahi", "http://www.google.com", level, Classtype.ONLINE, classname),
+      Classroom(timesDate[2], "Fernanda", "http://www.google.com", level, type, "zoom.xpto.xpto"),
+      Classroom(timesDate[3], "Guilherme", "http://www.google.com", level, Classtype.ONLINE, classname),
+      Classroom(timesDate[3], "Amanda", "http://www.google.com", level, type, "zoom.xpto.xpto"),
+      Classroom(timesDate[4], "Gisele", "http://www.google.com", level, Classtype.ONLINE, classname),
+      Classroom(timesDate[4], "Junior", "http://www.google.com", level, type, "zoom.xpto.xpto"),
+      Classroom(timesDate[5], "Patricia", "http://www.google.com", level, Classtype.ONLINE, classname),
+      Classroom(timesDate[5], "Carla", "http://www.google.com", level, type, "zoom.xpto.xpto"),
+      Classroom(timesDate[6], "Rogêrio", "http://www.google.com", level, Classtype.ONLINE, classname),
+      Classroom(timesDate[6], "Maisa", "http://www.google.com", level, type, "zoom.xpto.xpto"),
+      Classroom(timesDate[7], "Pedro", "http://www.google.com", level, type, classname),
+      Classroom(timesDate[7], "Bruno", "http://www.google.com", level, type, "zoom.xpto.xpto"),
+      Classroom(timesDate[8], "Guilherme", "http://www.google.com", level, Classtype.ONLINE, classname),
+      Classroom(timesDate[8], "Avahi", "http://www.google.com", level, type, "zoom.xpto.xpto"),
+      Classroom(timesDate[9], "Gisele", "http://www.google.com", level, Classtype.ONLINE, classname),
+      Classroom(timesDate[9], "Junior", "http://www.google.com", level, type, "zoom.xpto.xpto"),
+      Classroom(timesDate[10], "Peter", "http://www.google.com", level, Classtype.ONLINE, classname),
+      Classroom(timesDate[10], "Narla", "http://www.google.com", level, type, "zoom.xpto.xpto"),
+      Classroom(timesDate[11], "Bruna", "http://www.google.com", level, Classtype.ONLINE, classname),
+      Classroom(timesDate[11], "Marcela", "http://www.google.com", level, type, "zoom.xpto.xpto"),
+      Classroom(timesDate[12], "Valda", "http://www.google.com", level, Classtype.ONLINE, classname),
+      Classroom(timesDate[12], "Marcilene", "http://www.google.com", level, type, "zoom.xpto.xpto"),
+    ];
   }
 }
