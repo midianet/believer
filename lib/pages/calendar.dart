@@ -14,6 +14,7 @@ class CalendarPage extends StatefulWidget {
 
 class _CalendarPageState extends State<CalendarPage> {
   int level = 0; //todo trazer do prefs.
+  int _type = -1;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -87,6 +88,55 @@ class _CalendarPageState extends State<CalendarPage> {
                       buildDateColumn("Sat", 13, false),
                     ],
                   ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start ,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Type"),
+                      Row(
+                        //crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            OutlinedButton(
+                              onPressed: () {
+                                setState(() {_type = -1;});
+                              },
+                              child: Text(
+                                "  Todos    ",
+                                style: TextStyle(
+                                    color: (_type == -1) ? Colors.green : Colors.black26
+                                ),
+                              ),
+                            ),
+                            OutlinedButton(
+                              onPressed: () {
+                                setState(() {_type = 0;});
+                              },
+                              child: Text(
+                                "Online",
+                                style: TextStyle(
+                                    color: (_type == 0) ? Colors.green : Colors.black26
+                                ),
+                              ),
+                            ),
+                            OutlinedButton(
+                              onPressed: () {
+                                setState(() {_type = 1;});
+                              },
+                              child: Text(
+                                "Presential",
+                                style: TextStyle(
+                                    color: (_type == 1) ? Colors.green : Colors.black26
+                                ),
+                              ),
+                            )
+                          ]
+                      ),
+                    ],
+                  )
                 ),
                 Container(
                   padding: EdgeInsets.only(left: 10 , right: 10) ,

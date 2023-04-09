@@ -1,5 +1,6 @@
 import 'package:believer/pages/calendar.dart';
 import 'package:believer/pages/home.dart';
+import 'package:believer/pages/news.dart';
 import 'package:flutter/material.dart';
 
 class SchoolManagement extends StatefulWidget {
@@ -13,7 +14,7 @@ class _SchoolManagementState extends State<SchoolManagement> {
   final List pages = [
     const HomePage(),
     const CalendarPage(),
-    null,
+    const NewsPage(),
   ];
   @override
   Widget build(BuildContext context) {
