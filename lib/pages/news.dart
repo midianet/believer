@@ -24,7 +24,10 @@ class _NewsPageState extends State<NewsPage> {
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: ListView(
             children: [
-              buildNews("Feliz Natal")
+              buildNews(Icons.calendar_today_sharp, "03-07 Sexta Feira Santa"),
+              buildNews(Icons.wallet_giftcard_rounded, "03-06 Aniversário Professora Beatriz"),
+              buildNews(Icons.calendar_today_sharp, "03-21 Tiradentes"),
+
             ],
           ),
         )
@@ -32,10 +35,24 @@ class _NewsPageState extends State<NewsPage> {
     );
   }
 
-  buildNews(String message){
+  buildNews(IconData icon, String message){
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.red,
+      margin: EdgeInsets.only(bottom: 5),
+      padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+            border: Border.all(width: 1, color: Colors.grey),
+            //50: 100: 200: 300: 400:  500:  600:  700: 800: 900
+            color: Colors.blueGrey[50],
+            borderRadius: BorderRadius.circular(10)),
+      child: Row(
+        children: [
+          Icon(icon),
+          SizedBox(width: 5),
+          Text(message, overflow: TextOverflow.ellipsis,),
+        ],
+      ),
+    );
+  }
 
   buildHeader(){
     return Container(
